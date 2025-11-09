@@ -14,52 +14,20 @@ void bubbleSort(int nums[],int n){
     }
   }
 }
-void merge(int nums[],int left,int mid,int right){
-  int m=mid-left+1;
-  int n=right-mid;
-  int lnums[m];
-  int rnums[n];
-  int k=left;
 
-  for(int i=0;i<m;i++){
-    lnums[i]=nums[k];
-    k++;
-  }
-  for(int i=0;i<n;i++){
-    rnums[i]=nums[k];
-    k++;
-  }
-  int i=0;
-  int j=0;
-  k=left;
-  while(i<m && j<n){
-    if(lnums[i]<rnums[j]){
-      nums[k]=lnums[i];
-      i++;
+void selectionSort(int nums[], int n){
+  for(int i=0;i<n-1;i++){
+    int min_idx = i;
+    for(int j=i+1;j<n;j++){
+      if(nums[j] < nums[min_idx]){
+        min_idx = j;
+      }
     }
-    else{
-      nums[k]=rnums[j];
-      j++;
+    if(min_idx != i){
+      int tmp = nums[i];
+      nums[i] = nums[min_idx];
+      nums[min_idx] = tmp;
     }
-    k++;
-  }
-  while(i<m){
-    nums[k]=lnums[i];
-    i++;
-    k++;
-  }
-  while(j<n){
-    nums[k]=rnums[j];
-    j++;
-    k++;
-  }
-}
-void mergeSort(int nums[],int left,int right){
-  if(left<right){
-    int mid=(left+right)/2;
-    mergeSort(nums,left,mid);
-    mergeSort(nums,mid+1,right);
-    merge(nums,left,mid,right);
   }
 }
 void printNums(int nums[],int n){
@@ -92,8 +60,8 @@ int main(){
   else{
     printf("Inside the parent process process id :%d\n",getpid());
     printf("Waiting for child to execute !");
-    wait(NULL);
-    mergeSort(nums,0,n-1);
+  wait(NULL);
+  selectionSort(nums,n);
     printNums(nums,n);
     
   }
