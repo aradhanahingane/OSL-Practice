@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<sys/wait.h>
+
 void bubbleSort(int nums[],int n){
   for(int i=0;i<n-1;i++){
     for(int j=0;j<n-i-1;j++){
@@ -30,6 +31,7 @@ void selectionSort(int nums[], int n){
     }
   }
 }
+
 void printNums(int nums[],int n){
   printf("Sorted array :");
   for(int i=0;i<n;i++){
@@ -37,11 +39,12 @@ void printNums(int nums[],int n){
   }
   printf("\n");
 }
+
 int main(){
   int n;
-  printf("Enter no. of elements in array :");
+  printf("Enter no. of elements in array : ");
   scanf("%d",&n);
-  printf("Enter the array elements :");
+  printf("Enter the array elements : ");
   int nums[n];
   for(int i=0;i<n;i++){
     scanf("%d",&nums[i]);
@@ -53,15 +56,15 @@ int main(){
     printf("Something went wrong !");
   }
   else if(pid==0){
-    printf("inside the child process pid:%d\n",getpid());
+    printf("Inside the child process pid:%d\n",getpid());
     bubbleSort(nums,n);
     printNums(nums,n);
   }
   else{
     printf("Inside the parent process process id :%d\n",getpid());
-    printf("Waiting for child to execute !");
-  wait(NULL);
-  selectionSort(nums,n);
+    printf("Waiting for child to execute! ");
+    wait(NULL);
+    selectionSort(nums,n);
     printNums(nums,n);
     
   }
